@@ -5,7 +5,12 @@ import java.lang.reflect.Method;
  */
 public class TestMain {
     public static void main(String[] args) {
-        ClassIsAnnotatedByTest annotatedClass = new ClassIsAnnotatedByTest();
+        ClassIsAnnotatedByTest annotatedClass = null;
+        try {
+            annotatedClass = ClassIsAnnotatedByTest.class.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
         Class<?> gettingClass = annotatedClass.getClass();
         Method[] methods = gettingClass.getMethods();
         for (Method method : methods) {
